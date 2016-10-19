@@ -18,4 +18,3 @@ url_array = []
   puts url_array
   print "There were", " ", line_counter,  " " ,"requests"
 end
-#test to revert comments
