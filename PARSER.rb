@@ -16,9 +16,6 @@ redirect = 0
 File.open("This_is_a_test.txt", "r") do |f|
 line_counter = 0
 url_array = []
-failarray = []
-redirectarray = []
-successarray = []
 errors_array = []
   f.each_line do |line|
     matches = (/\A(?<ip_address>\S+) \S+ \S+ \[(?<time>[^\]]+)\] "(?<method>GET|POST) (?<url>\S+) \S+?" (?<status>\d+) (?<bytes>\S+)/).match(line)
