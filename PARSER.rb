@@ -47,12 +47,19 @@ errors_array = []
   #the parsing of the file is finished at this point
   puts "DONE"
   print "There were", " ", line_counter,  " " ,"requests"
-  #successpercent = success /= line_counter *= 100
-  #failpercent = fail /= line_counter
-  #redirpct = redirect /= line_counter
-  #print successpercent
+  #calculates the failures and redirects
+  successpercent = success / line_counter * 100
+  failpercent = fail / line_counter
+  redirpct = redirect / line_counter
+  print successpercent
   #print failpercent
   #print redirpct
-  
+  #figures out the most and least requested files
+  freq = url_array.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+  url_array.max_by { |v| freq[v] }
+  puts ' '
+  print 'The most requested file was', ' ', url_array[0]
+  puts ' '
+  print 'The least requested file was', ' ' , url_array[-1]
 end
 #test to revert comments
