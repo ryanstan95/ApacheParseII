@@ -6,10 +6,10 @@ LOCALIZE = 'downloaded_file.bak'
 
 
 #downloads the file
-makelocal = open(SLOW_URL)
+#makelocal = open(SLOW_URL)
 #save the file
 # reference code http://stackoverflow.com/questions/2515931/how-can-i-download-a-file-from-a-url-and-save-it-in-rails
-IO.copy_stream(makelocal, LOCALIZE)
+#IO.copy_stream(makelocal, LOCALIZE)
 #start parsing the file
 File.open("This_is_a_test.txt", "r") do |f|
 line_counter = 0
