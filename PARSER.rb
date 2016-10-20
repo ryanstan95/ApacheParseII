@@ -42,17 +42,19 @@ errors_array = []
     end
     line_counter = line_counter+1
     time = matches[:time]
-    puts status[0]
+    #puts status[0]
   end
   #the parsing of the file is finished at this point
   puts "DONE"
   print "There were", " ", line_counter,  " " ,"requests"
   #calculates the failures and redirects
-  successpercent = success / line_counter * 100
-  failpercent = fail / line_counter
-  redirpct = redirect / line_counter
-  print successpercent
-  #print failpercent
+  successpercent = success.to_f / line_counter.to_f * 100
+  failpercent = fail.to_f / line_counter.to_f * 100
+  redirpct = redirect.to_f / line_counter.to_f * 100
+  puts ' '
+  print failpercent, '% of requests were unsucessful'
+  puts ' '
+  print redirpct, '% of lines were redirects'
   #print redirpct
   #figures out the most and least requested files
   freq = url_array.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
