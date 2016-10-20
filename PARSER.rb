@@ -17,6 +17,7 @@ File.open("This_is_a_test.txt", "r") do |f|
 line_counter = 0
 url_array = []
 errors_array = []
+monthly_requests = {}
   f.each_line do |line|
     matches = (/\A(?<ip_address>\S+) \S+ \S+ \[(?<time>[^\]]+)\] "(?<method>GET|POST) (?<url>\S+) \S+?" (?<status>\d+) (?<bytes>\S+)/).match(line)
     #checks for bustted-ass lines and dumps them into an array of errors
@@ -25,8 +26,8 @@ errors_array = []
 	    next
     end
     whole_day = Date.strptime(matches[:time], '%d/%b/%Y:%H:%M:%S')
-    last2 = whole_day.strftime('%Y-%m')
-    puts last2
+    last2 = whole_day.strftime('%d-%Y-%m')
+    #puts last2
     ip = matches[:ip_address]
     url = matches[:url]
     status = matches[:status]
@@ -42,7 +43,8 @@ errors_array = []
     end
     line_counter = line_counter+1
     time = matches[:time]
-    #puts status[0]
+    unless monthly_requests[last2] then monthly_requests[last2] = [] end
+    monthly_requests[last2].push(line)
   end
   #the parsing of the file is finished at this point
   puts "DONE"
@@ -63,5 +65,6 @@ errors_array = []
   print 'The most requested file was', ' ', url_array[0]
   puts ' '
   print 'The least requested file was', ' ' , url_array[-1]
+  puts monthly_requests
 end
 #test to revert comments
