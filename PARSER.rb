@@ -3,7 +3,9 @@ require 'open-uri'
 #initialization
 SLOW_URL = 'https://s3.amazonaws.com/tcmg412-fall2016/http_access_log'
 LOCALIZE = 'downloaded_file.bak'
-
+success = 0
+fail = 0
+redirect = 0
 
 #downloads the file
 #makelocal = open(SLOW_URL)
@@ -34,6 +36,13 @@ errors_array = []
     method = matches[:method]
     url_array.push(url)
     #add to the line counter
+    if status[0] == "4"
+	    fail += 1
+    elsif status[0] == "3"
+	    redirect += 1
+    elsif status[0] == '2'
+	    success += 1
+    end
     line_counter = line_counter+1
     time = matches[:time]
     puts status[0]
@@ -41,6 +50,12 @@ errors_array = []
   #the parsing of the file is finished at this point
   puts "DONE"
   print "There were", " ", line_counter,  " " ,"requests"
-  puts failarray
+  #successpercent = success /= line_counter *= 100
+  #failpercent = fail /= line_counter
+  #redirpct = redirect /= line_counter
+  #print successpercent
+  #print failpercent
+  #print redirpct
+  
 end
 #test to revert comments
